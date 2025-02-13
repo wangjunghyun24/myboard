@@ -14,9 +14,9 @@ public class SecurityConfig {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
-                        .requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
+                        .requestMatchers(new AntPathRequestMatcher("/**")).permitAll())//ウェブアプリケーションのすべてのページとAPIエンドポイントがセキュリティ検証なしに誰でもアクセスできます。
                 .csrf((csrf) -> csrf
-                        .ignoringRequestMatchers(new AntPathRequestMatcher("/articles/**")))
+                        .ignoringRequestMatchers(new AntPathRequestMatcher("/articles/**")))///articles/**へのリクエストは、CSRF保護なしで処理されます。
 
         ;
         return http.build();

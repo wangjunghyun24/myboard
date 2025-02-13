@@ -17,6 +17,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Getter
+/*データベースのテーブルと1:1でマッピングされるクラス*/
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

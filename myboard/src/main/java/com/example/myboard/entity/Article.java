@@ -14,6 +14,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Getter
+/*データベースのテーブルと1:1でマッピングされるクラス*/
 public class Article {
     @Id
     @GeneratedValue
@@ -23,14 +24,4 @@ public class Article {
     @Column
     private String content;
 
-
-    /*public Article (Long id , String title , String content){
-        this.id = id;
-        this.title = title ;
-        this.content = content;
-
-    }
-    public String toString(){
-        return "Article{"+"id="+id+",title='"+title+'\''+",content='"+content+'\''+'}';
-    }*/
 }

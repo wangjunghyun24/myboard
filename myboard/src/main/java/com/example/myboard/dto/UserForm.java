@@ -14,6 +14,8 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @Setter
+
+/*エンティティの一部のデータをクライアントに配信するためのdtoです*/
 public class UserForm {
     @Size(min = 3, max = 25)
     @NotEmpty(message = "사용자ID는 필수항목입니다.")

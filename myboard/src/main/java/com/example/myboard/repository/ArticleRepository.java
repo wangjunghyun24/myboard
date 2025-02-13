@@ -5,7 +5,7 @@ import com.example.myboard.entity.Article;
 
 import java.util.ArrayList;
 
-
+//データベースと直接コミュニケーションする階層
 public interface ArticleRepository extends CrudRepository<Article,Long>{
 
     @Override
