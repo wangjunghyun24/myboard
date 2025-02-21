@@ -13,24 +13,23 @@ import java.util.List;
 public class CommentApiController {
     @Autowired
     private CommentService commentService;
-    // 댓글 목록 조회
+    // コメントリスト照会
     @GetMapping("/api/articles/{articleId}/comments")
     public ResponseEntity<List<CommentDto>> comments(@PathVariable Long articleId) {
-        // 서비스에게 위임
+        // サービスに委任
         List<CommentDto> dtos = commentService.comments(articleId);
-        // 결과 응답
+        // 結果応答
         return ResponseEntity.status(HttpStatus.OK).body(dtos);
     }
 
-    // 댓글 생성
+    // コメント作成
     @PostMapping("/api/articles/{articleId}/comments")
     public ResponseEntity<CommentDto> create(@PathVariable Long articleId,
                                              @RequestBody CommentDto dto) {
-        // 서비스에게 위임
+        // サービスに委任
         CommentDto createdDto = commentService.create(articleId, dto);
-        // 결과 응답
+        // 結果応答
         return ResponseEntity.status(HttpStatus.OK).body(createdDto);
     }
-    // 댓글 수정
-    // 댓글 삭제
+
 }

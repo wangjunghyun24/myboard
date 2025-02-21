@@ -20,7 +20,7 @@ public class CommentService {
     @Autowired
     private ArticleRepository articleRepository;
     public List<CommentDto> comments(Long articleId) {
-        // 반환
+        // 返還
         return commentRepository.findByArticleId(articleId)
                 .stream()
                 .map(comment -> CommentDto.createCommentDto(comment))
@@ -29,14 +29,14 @@ public class CommentService {
 
     @Transactional
     public CommentDto create(Long articleId, CommentDto dto) {
-        // 게시글 조회 및 예외 발생
+        // 掲示文の照会及び例外発生
         Article article = articleRepository.findById(articleId)
                 .orElseThrow(() -> new IllegalArgumentException("댓글 생성 실패! 대상 게시글이 없습니."));
-        // 댓글 엔티티 생성
+        // コメントエンティティ作成
         Comment comment = Comment.createComment(dto, article);
-        // 댓글 엔티티를 DB로 저장
+        // コメントエンティティをDBに保存
         Comment created = commentRepository.save(comment);
-        // DTO로 변경하여 반환
+        // DTOに変更して返還
         return CommentDto.createCommentDto(created);
     }
 

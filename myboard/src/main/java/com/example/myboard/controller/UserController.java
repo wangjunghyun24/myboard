@@ -27,7 +27,7 @@ public class UserController {
     public String Testform() {
         return "user/sign";
     }
-
+    //会員登録
     @PostMapping("/user/join")
     public String createUser(@Valid UserForm userCreateForm, BindingResult bindingResult, Model model) {
 
@@ -59,7 +59,7 @@ public class UserController {
 
         return "redirect:/user/login";
     }
-
+    //ログイン
     @GetMapping("/user/login")
     public String loginform() {
         return "user/login";
