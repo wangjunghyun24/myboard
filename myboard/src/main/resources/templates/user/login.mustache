@@ -1,0 +1,19 @@
+{{>layouts/header}}
+<form class="container" action="/user/login" method="post">
+    {{#param.error}}
+        <div class="alert alert-danger">
+            ID or Pssword Check plz
+        </div>
+    {{/param.error}}
+    <div class = "mb-3">
+        <label class = "form-label">ID</label>
+        <input type = "text" class = "form-control" name = "username">
+    </div>
+    <div class = "mb-3">
+        <label class = "form-label">Password</label>
+        <input type = "password" class = "form-control" name = "password">
+    </div>
+
+    <button type="submit" class = "btn btn-primary">login</button>
+
+</form>

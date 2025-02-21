@@ -1,18 +1,24 @@
 package com.example.myboard.controller;
 
+import com.example.myboard.Service.CommentService;
+import com.example.myboard.dto.CommentDto;
 import com.example.myboard.entity.Article;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
+
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import com.example.myboard.dto.ArticleForm;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import com.example.myboard.entity.Article;
 import com.example.myboard.repository.ArticleRepository;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+
 
 import java.util.List;
 
@@ -22,6 +28,8 @@ public class ArticleController
 {
     @Autowired
     private ArticleRepository articleRepository;
+    @Autowired
+    private CommentService commentService;
     @GetMapping("/articles/new")
     public String newArticleForm(){
         return "articles/new";
@@ -46,8 +54,12 @@ public class ArticleController
 
         //idを照会してデータを取得する
         Article articleEntity = articleRepository.findById(id).orElse(null);
+        List<CommentDto> commentsDtos = commentService.comments(id);
+
         //モデルにデータを登録する
         model.addAttribute("article",articleEntity);
+        model.addAttribute("commentDtos", commentsDtos);
+
         // ビューページを返す
 
         return "articles/show";
@@ -56,11 +68,17 @@ public class ArticleController
 
 
     @GetMapping("/articles")
-    public String index (Model model){
+    public String index (Model model, @PageableDefault(size = 3) Pageable pageable){
+        Page<Article> articleEntityList = articleRepository.findAll(pageable);
         //すべてのデータのインポート
-        List<Article>articleEntityList = articleRepository.findAll();
+        //List<Article>articleEntityList = articleRepository.findAll();
         //モデルにデータを登録する
         model.addAttribute("articleList",articleEntityList);
+        model.addAttribute("prev", pageable.previousOrFirst().getPageNumber());
+        model.addAttribute("next", pageable.next().getPageNumber());
+        model.addAttribute("hasNext", articleEntityList.hasNext());
+        model.addAttribute("hasPrev", articleEntityList.hasPrevious());
+
         // ビューページを設定する
 
         return "articles/index";

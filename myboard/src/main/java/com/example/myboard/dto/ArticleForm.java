@@ -1,15 +1,12 @@
 package com.example.myboard.dto;
 
 import com.example.myboard.entity.Article;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
-@ToString
 @AllArgsConstructor
-@Setter
+@NoArgsConstructor
+@ToString
 /*エンティティの一部のデータをクライアントに配信するためのdtoです*/
 
 public class ArticleForm
